@@ -1,0 +1,7 @@
+# One probe per line; "\n" is expanded to a newline. Lines starting with # are ignored.
+# Write prompts from your adapter's own domain: that is where it moves the output most.
+### Instruction:\nList all customers who ordered in 2024.\n### SQL:\nSELECT
+### Instruction:\nCount orders per country.\n### SQL:\n
+Schema: users(id, name, email)\nQuestion: how many users are there?\nSQL:
+The ticket was escalated because
+Summarise in one sentence: The meeting was moved to Thursday because the

@@ -1,0 +1,36 @@
+name: Result from a real engine
+description: Tell us how lora-check behaved against a real inference server
+labels: [engine-report]
+body:
+  - type: input
+    id: engine
+    attributes:
+      label: Engine, version and hardware
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Base model and adapters (public names if possible)
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Was the verdict right?
+      options:
+        - "Yes: healthy server, PASS"
+        - "Yes: real fault found"
+        - "No: false alarm"
+        - "No: missed a known fault"
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Report (`--format json`)
+      render: json
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Flags used, measured noise, anything surprising.

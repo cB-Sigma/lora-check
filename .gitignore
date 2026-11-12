@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+*.whl
+
+# Environments
+.venv/
+venv/
+.venvs/
+env/
+
+# Tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Models, adapters and generated artefacts
+*.safetensors
+*.bin
+*.pt
+*.gguf
+models/
+adapters/
+hf-cache/
+*.fp.json
+fingerprint.json
+lora-check-report.*
+
+# Editors and OS
+.idea/
+.vscode/
+*.swp
+.DS_Store

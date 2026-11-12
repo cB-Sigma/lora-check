@@ -1,0 +1,37 @@
+# Gate a deployment on LoRA serving correctness.
+#
+# Assumes a staging endpoint that serves your adapters and a fingerprint file
+# committed next to this workflow (created once with `lora-check fingerprint`).
+name: Verify LoRA serving
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - run: pip install git+https://github.com/cb-Sigma/lora-check
+      - name: Lint the adapter that is about to be deployed
+        run: lora-check lint ./adapters/sql-lora --engine vllm --engine-version "$VLLM_VERSION"
+        env:
+          VLLM_VERSION: "0.32.0"
+      - name: Verify the staging endpoint
+        run: |
+          lora-check verify \
+            --base-url "$ENDPOINT" \
+            --fingerprint ci/adapters.fp.json \
+            --format markdown --output "$GITHUB_STEP_SUMMARY" \
+            --strict --quiet
+        env:
+          ENDPOINT: ${{ vars.STAGING_ENDPOINT }}
+          LORA_CHECK_API_KEY: ${{ secrets.STAGING_API_KEY }}

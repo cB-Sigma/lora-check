@@ -1,0 +1,36 @@
+name: Bug report
+description: A wrong verdict, a crash, or a lint rule that is out of date
+labels: [bug]
+body:
+  - type: dropdown
+    id: command
+    attributes:
+      label: Command
+      options: [verify, fingerprint, lint, mine, sim, other]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      description: For a wrong verdict, say whether it was a false alarm or a missed fault, and how you know.
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Report
+      description: Output of the command with `--format json` (remove anything private).
+      render: json
+  - type: input
+    id: engine
+    attributes:
+      label: Engine and version
+      placeholder: "vLLM 0.32.0, SGLang ..., other"
+  - type: input
+    id: versions
+    attributes:
+      label: lora-check and Python versions
+      placeholder: "lora-check 0.1.0, Python 3.12"
+    validations:
+      required: true
